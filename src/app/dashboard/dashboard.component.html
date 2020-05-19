@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>
+    Dashboard de Automação
+  </h1>
+  <div *ngIf="messageErro !==''">
+    <p style="color: red;">{{ messageErro }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Portas disponíveis</h2>
+    <p>
+      <button
+        type="button"
+        style="padding: 1rem; margin-right: 1rem;"
+        (click)="getPort()"
+      >
+        Pesquisar
+      </button>
+    </p>
+    <p>
+      <ng-container *ngIf="ports">
+        <ng-container *ngIf="ports.length > 0; else elseTemplate">
+          <select
+            id="optPort"
+            #optPort
+            style="padding: 1rem; margin-right: 1rem;"
+          >
+            <option *ngFor="let port of ports" [value]="port.name">{{
+              port.name
+            }}</option>
+          </select>
+          <button
+            type="button"
+            style="padding: 1rem; margin-right: 1rem;"
+            (click)="sendPort()"
+          >
+            {{ btnSendTitle }}
+          </button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <span style="color: red;"> nenhuma porta disponível </span>
+        </ng-template>
+      </ng-container>
+    </p>
+  </div>
+</div>
